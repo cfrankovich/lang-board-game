@@ -30,7 +30,7 @@ char tick_startup_state(SDL_Event e, bool *running)
 	return 'S';
 }
 
-void render_startup_state(SDL_Renderer *r)
+void render_startup_state()
 {
 	
 }
@@ -61,7 +61,7 @@ char tick_game_state(SDL_Event e, bool *running)
 	return 'G';
 }
 
-void render_game_state(SDL_Renderer *r)
+void render_game_state()
 {
 	
 }

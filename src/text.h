@@ -4,6 +4,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
+#include "definitions.h"
+
 typedef struct
 {
 	char *string;
@@ -15,6 +17,6 @@ typedef struct
 } Text_t;
 
 /* Returns the text type based on parameters given */
-void init_text(Text_t *thetext, char *textstring, TTF_Font *font, int x, int y, SDL_Color color, SDL_Renderer *rendrr);
+void init_text(Text_t *thetext, char *textstring, TTF_Font *font, int x, int y, SDL_Color color);
 
 #endif

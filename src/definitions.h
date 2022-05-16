@@ -17,4 +17,6 @@ typedef struct
 	SDL_Rect hitbox;
 } MyImage_T;
 
+extern SDL_Renderer *RENDERER;
+
 #endif 

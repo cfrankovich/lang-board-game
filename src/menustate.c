@@ -57,8 +57,8 @@ char tick_menu_state(SDL_Event e, bool *running)
 	return 'M';
 }
 
-void render_menu_state(SDL_Renderer *r)
+void render_menu_state()
 {
-	SDL_RenderCopy(r, menuimage.texture, NULL, &menuimage.hitbox);
+	SDL_RenderCopy(RENDERER, menuimage.texture, NULL, &menuimage.hitbox);
 }
 

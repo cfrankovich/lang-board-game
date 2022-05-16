@@ -15,6 +15,6 @@ typedef struct
 	SDL_Texture *texture;
 } TileAsset_T; 
 
-int load_asset(TileAsset_T *tile, SDL_Renderer *r);
+int load_asset(TileAsset_T *tile);
 
 #endif 

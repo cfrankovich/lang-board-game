@@ -4,12 +4,12 @@
 #include "definitions.h"
 #include "initstates.h"
 
-void init_state(char newstate, SDL_Renderer *r)
+void init_state(char newstate)
 {
 	switch (newstate)
 	{
 		case 'M':
-			init_menu_state(r);
+			init_menu_state();
 			break;
 
 		case 'S':
@@ -23,10 +23,10 @@ void init_state(char newstate, SDL_Renderer *r)
 }
 
 MyImage_T menuimage;
-void init_menu_state(SDL_Renderer *r)
+void init_menu_state()
 {
-	menuimage.texture = IMG_LoadTexture(r, MENU_SCREEN_PATH);
-	menuimage.hitbox.x = 29;
+	menuimage.texture = IMG_LoadTexture(RENDERER, MENU_SCREEN_PATH);
+	menuimage.hitbox.x = 0;
 	menuimage.hitbox.y = 0;
 	menuimage.hitbox.w = WIDTH;
 	menuimage.hitbox.h = HEIGHT;

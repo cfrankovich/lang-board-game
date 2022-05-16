@@ -2,14 +2,15 @@
 #include <SDL2/SDL_ttf.h>
 
 #include "text.h"
+#include "definitions.h"
 
-void init_text(Text_t *thetext, char *textstring, TTF_Font *font, int x, int y, SDL_Color color, SDL_Renderer *rendrr)
+void init_text(Text_t *thetext, char *textstring, TTF_Font *font, int x, int y, SDL_Color color)
 {
 	thetext->string = textstring;
 	thetext->surface = TTF_RenderText_Solid(font, textstring, color);
 
 	int tw, th;
-	thetext->texture = SDL_CreateTextureFromSurface(rendrr, thetext->surface);
+	thetext->texture = SDL_CreateTextureFromSurface(RENDERER, thetext->surface);
 	SDL_QueryTexture(thetext->texture, NULL, NULL, &tw, &th); 
 
 	thetext->rect.x = x;

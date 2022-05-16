@@ -7,11 +7,11 @@
 #include "assets.h"
 
 /* Properly calls which state needs to be initialized */
-void init_state(char newstate, SDL_Renderer *r); 
+void init_state(char newstate); 
 
 /* Meu State */
 extern MyImage_T menuimage; 
-void init_menu_state(SDL_Renderer *r);
+void init_menu_state();
 
 /* Startup State */
 void init_startup_state();

@@ -12,6 +12,6 @@
 char tick_menu_state(SDL_Event e, bool *running);
 
 /* Handle All Rendering */
-void render_menu_state(SDL_Renderer *r);
+void render_menu_state();
 
 #endif

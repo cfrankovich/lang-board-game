@@ -14,15 +14,17 @@
 #include "gamestate.h"
 #include "initstates.h"
 
+SDL_Renderer *RENDERER;
+
 int main(int argc, char **argv)
 {
 	/* Basic SDL Stuff */
 	SDL_Event event;
 	SDL_Window *window = NULL;
-	SDL_Renderer *renderer = NULL;
+	RENDERER = NULL;
 	SDL_Init(SDL_INIT_VIDEO);
 	window = SDL_CreateWindow("Lang Board Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, 0);
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	RENDERER = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 	/* Parse Args */ 
 	bool FPS_FLAG = false;
@@ -71,7 +73,7 @@ int main(int argc, char **argv)
 	char framecount[16] = "Frames: 0\0";
 	int updates, count;
 	Text_t frametext; 
-	init_text(&frametext, framecount, font12px, 0, 0, white, renderer);
+	init_text(&frametext, framecount, font12px, 0, 0, white);
 	updates = count = 0;
 
 	/* Game Loop */
@@ -79,15 +81,15 @@ int main(int argc, char **argv)
 	running = true;
 	char state;
 	state = 'M';
-	init_state(state, renderer);
+	init_state(state);
 
 	while (running)
 	{
 		elapsed = SDL_GetTicks();
 
 		/* Background */
-		SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
-		SDL_RenderClear(renderer);
+		SDL_SetRenderDrawColor(RENDERER, 0x00, 0x00, 0x00, 0xFF);
+		SDL_RenderClear(RENDERER);
 
 		/* State Manager Thing */ 
 		switch (state)
@@ -95,22 +97,22 @@ int main(int argc, char **argv)
 			case 'M':
 				/* menu state - basic menu upon launch */	
 				state = tick_menu_state(event, &running);
-				render_menu_state(renderer);
-				if (state != 'M') init_state(state, renderer);
+				render_menu_state();
+				if (state != 'M') init_state(state);
 				break;
 
 			case 'S':
 				/* startup state - sets up the game */
 				state = tick_startup_state(event, &running);
-				render_startup_state(renderer);
-				if (state != 'S') init_state(state, renderer);
+				render_startup_state();
+				if (state != 'S') init_state(state);
 				break;
 
 			case 'G':
 				/* game state - actual gameplay */ 
 				state = tick_game_state(event, &running);
-				render_game_state(renderer);
-				if (state != 'G') init_state(state, renderer);
+				render_game_state();
+				if (state != 'G') init_state(state);
 				break;
 		}
 
@@ -123,13 +125,13 @@ int main(int argc, char **argv)
 				sprintf(framecount, "Frames: %d\0", updates);
 				count++;
 				updates = 0;
-				init_text(&frametext, framecount, font12px, 0, HEIGHT-10, white, renderer);
+				init_text(&frametext, framecount, font12px, 0, HEIGHT-10, white);
 			}
-			SDL_RenderCopy(renderer, frametext.texture, NULL, &frametext.rect);
+			SDL_RenderCopy(RENDERER, frametext.texture, NULL, &frametext.rect);
 
 		}
 
-		SDL_RenderPresent(renderer);
+		SDL_RenderPresent(RENDERER);
 
 		frametime = SDL_GetTicks() - elapsed;
 		if (1000 / FPS > frametime) SDL_Delay((1000 / FPS) - frametime);

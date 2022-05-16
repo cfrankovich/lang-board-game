@@ -10,7 +10,7 @@ char tick_game_state(SDL_Event e, bool *running);
 char tick_startup_state(SDL_Event e, bool *running);
 
 /* Handles all rendering */
-void render_game_state(SDL_Renderer *r);
-void render_startup_state(SDL_Renderer *r);
+void render_game_state();
+void render_startup_state();
 
 #endif
