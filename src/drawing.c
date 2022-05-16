@@ -13,8 +13,8 @@ void draw_tile(TileAsset_T *tile, int x, int y, int z)
 	SDL_Rect rect;
 	rect.w = 40 * scale;
 	rect.h = 48 * scale;
-	rect.x = (x * 21 * scale) + (y * 21 * scale);
-	rect.y = (x * 12 * scale) + (y * -12 * scale) + (z * -20 * scale);
+	rect.x = (x * 21 * scale) + (y * 21 * scale) + WIDTH/2 - 35; 
+	rect.y = (x * 12 * scale) + (y * -12 * scale) + (z * -20 * scale) + HEIGHT/2 - 24;
 
 	SDL_RenderCopy(RENDERER, tile->texture, NULL, &rect);
 }

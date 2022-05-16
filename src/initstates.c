@@ -92,15 +92,6 @@ void init_startup_state()
 	}
 	head_node = prev;
 
-	current = head_node;
-	while (current != NULL)
-	{
-		printf("%d\n", current->tile->id);
-		current = current->next;
-	}
-
-	printf("workes!!!!\n");
-
 }
 
 void init_game_state()
