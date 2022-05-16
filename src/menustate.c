@@ -5,6 +5,7 @@
 #include "menustate.h"
 #include "assets.h"
 #include "definitions.h"
+#include "initstates.h"
 
 char tick_menu_state(SDL_Event e, bool *running)
 {
@@ -38,7 +39,7 @@ char tick_menu_state(SDL_Event e, bool *running)
 
 			if (SDL_HasIntersection(&mousrect, &playrect))
 			{
-				return 'G';
+				return 'S';
 			}
 			else if (SDL_HasIntersection(&mousrect, &instrect)) 
 			{
@@ -58,12 +59,6 @@ char tick_menu_state(SDL_Event e, bool *running)
 
 void render_menu_state(SDL_Renderer *r)
 {
-	/* Draw the menu */
-	SDL_Texture *menutexture = NULL;
-	menutexture = IMG_LoadTexture(r, MENU_SCREEN_PATH);
-	SDL_Rect rect = {0, 0, WIDTH, HEIGHT};
-	SDL_RenderCopy(r, menutexture, NULL, &rect);
-
-	SDL_DestroyTexture(menutexture);
+	SDL_RenderCopy(r, menuimage.texture, NULL, &menuimage.hitbox);
 }
 

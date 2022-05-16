@@ -10,7 +10,7 @@ override LIBS += $(SDL_LIBS)
 all: create 
 	@echo "Done!"
 
-create: main.o text.o drawing.o assets.o menustate.o gamestate.o 
+create: main.o text.o drawing.o assets.o initstates.o menustate.o gamestate.o 
 	$(CC) $(LDFLAGS) -o $(NAME) $^ $(LIBS)
 
 main.o: main.c 
@@ -23,6 +23,9 @@ drawing.o: drawing.c
 	$(CC) $(LDFLAGS) -o $@ -c $^ $(LIBS)
 
 assets.o: assets.c
+	$(CC) $(LDFLAGS) -o $@ -c $^ $(LIBS)
+
+initstates.o: initstates.c
 	$(CC) $(LDFLAGS) -o $@ -c $^ $(LIBS)
 
 menustate.o: menustate.c

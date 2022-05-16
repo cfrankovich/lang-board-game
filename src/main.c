@@ -12,6 +12,7 @@
 
 #include "menustate.h"
 #include "gamestate.h"
+#include "initstates.h"
 
 int main(int argc, char **argv)
 {
@@ -78,6 +79,7 @@ int main(int argc, char **argv)
 	running = true;
 	char state;
 	state = 'M';
+	init_state(state, renderer);
 
 	while (running)
 	{
@@ -91,13 +93,24 @@ int main(int argc, char **argv)
 		switch (state)
 		{
 			case 'M':
-				/* menu state */	
+				/* menu state - basic menu upon launch */	
 				state = tick_menu_state(event, &running);
 				render_menu_state(renderer);
+				if (state != 'M') init_state(state, renderer);
+				break;
+
+			case 'S':
+				/* startup state - sets up the game */
+				state = tick_startup_state(event, &running);
+				render_startup_state(renderer);
+				if (state != 'S') init_state(state, renderer);
 				break;
 
 			case 'G':
-				/* game state */ 
+				/* game state - actual gameplay */ 
+				state = tick_game_state(event, &running);
+				render_game_state(renderer);
+				if (state != 'G') init_state(state, renderer);
 				break;
 		}
 

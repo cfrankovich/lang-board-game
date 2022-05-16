@@ -5,7 +5,6 @@
 #include <SDL2/SDL_image.h>
 #include <stdbool.h>
 
-#include "menustate.h"
 #include "assets.h"
 #include "definitions.h"
 
