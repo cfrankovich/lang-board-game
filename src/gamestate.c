@@ -3,6 +3,7 @@
 
 #include "definitions.h"
 #include "gamestate.h"
+#include "initstates.h"
 
 /* Startup */
 char tick_startup_state(SDL_Event e, bool *running)
@@ -32,7 +33,8 @@ char tick_startup_state(SDL_Event e, bool *running)
 
 void render_startup_state()
 {
-	
+	/* Now need to traverse through the linked list rendering the tiles */ 
+	//printf("%d\n", head_node->next->tile->id);	
 }
 
 /* Game */

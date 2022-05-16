@@ -17,6 +17,18 @@ typedef struct
 	SDL_Rect hitbox;
 } MyImage_T;
 
+typedef struct 
+{
+	unsigned short id;
+	SDL_Texture *texture;
+} TileAsset_T; 
+
+struct MapNode
+{
+	TileAsset_T *tile;
+	struct MapNode *next;
+};
+
 extern SDL_Renderer *RENDERER;
 
 #endif 

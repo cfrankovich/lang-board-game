@@ -14,6 +14,9 @@ extern MyImage_T menuimage;
 void init_menu_state();
 
 /* Startup State */
+extern struct MapNode *head_node;
+extern unsigned int map_height;
+extern unsigned int map_width;
 void init_startup_state();
 
 /* Game State */
