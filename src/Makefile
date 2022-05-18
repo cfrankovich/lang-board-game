@@ -7,10 +7,12 @@ SDL_LIBS := $(shell pkg-config --libs sdl2 SDL2_ttf SDL2_image)
 override CFLAGS += $(SDL_CFLAGS)
 override LIBS += $(SDL_LIBS)
 
+# Is there a beter way to write this?????? #
+
 all: create 
 	@echo "Done!"
 
-create: main.o text.o drawing.o assets.o initstates.o menustate.o gamestate.o 
+create: main.o text.o drawing.o assets.o initstates.o menustate.o gamestate.o camera.o 
 	$(CC) $(LDFLAGS) -o $(NAME) $^ $(LIBS)
 
 main.o: main.c 
@@ -32,6 +34,9 @@ menustate.o: menustate.c
 	$(CC) $(LDFLAGS) -o $@ -c $^ $(LIBS)
 
 gamestate.o: gamestate.c
+	$(CC) $(LDFLAGS) -o $@ -c $^ $(LIBS)
+
+camera.o: camera.c 
 	$(CC) $(LDFLAGS) -o $@ -c $^ $(LIBS)
 
 clean:

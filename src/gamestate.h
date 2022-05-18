@@ -3,7 +3,12 @@
 
 #include <SDL2/SDL.h>
 #include <stdbool.h>
+
 #include "definitions.h"
+#include "gamestate.h"
+#include "initstates.h"
+#include "drawing.h"
+#include "camera.h"
 
 /* Handles all updates */
 char tick_game_state(SDL_Event e, bool *running);

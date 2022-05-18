@@ -5,6 +5,7 @@
 #include "gamestate.h"
 #include "initstates.h"
 #include "drawing.h"
+#include "camera.h"
 
 /* Startup */
 char tick_startup_state(SDL_Event e, bool *running)
@@ -25,16 +26,35 @@ char tick_startup_state(SDL_Event e, bool *running)
 					*running = false;
 					break;
 
+				case SDLK_h:
+					CAMERA.x -= 10;
+					break;
+
+				case SDLK_l:
+					CAMERA.x += 10;
+					break;
+
+				case SDLK_j:
+					CAMERA.y += 10;
+					break;
+
+				case SDLK_k:
+					CAMERA.y -= 10;
+					break;
 			}
 			break;
 	}
+
+	//printf("CAMERA POS (%f, %f)\n", CAMERA.x, CAMERA.y);
+
+	update_camera_from_player(&player);
 
 	return 'S';
 }
 
 void render_startup_state()
 {
-	/* Now need to traverse through the linked list rendering the tiles */ 
+	/* Map */
 	struct MapNode *current;
 	current = head_node;
 	int iter, x, y, z;
@@ -51,9 +71,10 @@ void render_startup_state()
 		++iter;
 	}
 
-	SDL_Rect rect = {WIDTH/2, HEIGHT/2, 5, 5}; 
-	SDL_SetRenderDrawColor(RENDERER, 0xFF, 0x00, 0xFF, 0xFF);
-	SDL_RenderFillRect(RENDERER, &rect);
+	/* Player */
+	draw_tile(player.bottomtile, player.x, player.y, player.z);	
+	draw_tile(player.toptile, player.x, player.y, player.z+1);	
+
 }
 
 /* Game */
@@ -86,4 +107,5 @@ void render_game_state()
 {
 	
 }
+
 

@@ -3,8 +3,10 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
+
 #include "definitions.h"
 #include "assets.h"
+#include "camera.h"
 
 /* Properly calls which state needs to be initialized */
 void init_state(char newstate); 
@@ -17,6 +19,7 @@ void init_menu_state();
 extern struct MapNode *head_node;
 extern unsigned int map_height;
 extern unsigned int map_width;
+extern Player_T player;
 void init_startup_state();
 
 /* Game State */

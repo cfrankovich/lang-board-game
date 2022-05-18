@@ -15,6 +15,23 @@ int load_asset(TileAsset_T *tile)
 		case 1:
 			tile->texture = IMG_LoadTexture(RENDERER, STONE_TILE_PATH);
 			return 0;
+
+		case 2:
+			tile->texture = IMG_LoadTexture(RENDERER, PLAYER_TOP_TILE_PATH);
+			return 0;
+
+		case 3:
+			tile->texture = IMG_LoadTexture(RENDERER, PLAYER_BOTTOM_TILE_PATH);
+			return 0;
+
+		case 4:
+			tile->texture = IMG_LoadTexture(RENDERER, DARK_STONE_TILE_PATH);
+			return 0;
+
+		case 99:
+			tile->texture = IMG_LoadTexture(RENDERER, TEMPLATE_TILE_PATH);
+			return 0;
+			
 	}
 
 	return 1;

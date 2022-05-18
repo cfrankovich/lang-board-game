@@ -3,6 +3,8 @@
 
 #include "definitions.h"
 #include "initstates.h"
+#include "assets.h"
+#include "camera.h"
 
 void init_state(char newstate)
 {
@@ -35,8 +37,10 @@ void init_menu_state()
 struct MapNode *head_node;
 unsigned int map_width;
 unsigned int map_height;
+Player_T player;
 void init_startup_state()
 {
+	/* Map Stuff */
 	FILE *mapfile;
 	char buff[255];
 	int iter;
@@ -48,10 +52,8 @@ void init_startup_state()
 	fgets(buff, 255, mapfile); 
 
 	/* Read the first line and get width, height of map */
-	iter = 0;
-	for (int i = 1; buff[iter] != 32; ++iter, i+=9) { map_width += (buff[iter] - 48) * i; }
-	++iter;
-	for (int i = 1; buff[iter] != 10; ++iter, i+=9) { map_height += (buff[iter] - 48) * i; }
+	map_width = ((buff[0] - 48) * 10) + (buff[1] - 48);	
+	map_height = ((buff[3] - 48) * 10) + (buff[4] - 48);	
 
 	head_node = malloc(sizeof(struct MapNode));
 	head_node = NULL;
@@ -64,6 +66,8 @@ void init_startup_state()
 		{
 			TileAsset_T *tile;	
 			tile = malloc(sizeof(TileAsset_T));
+			tile->width = 1;
+			tile->height = 1;
 			tile->id = (buff[k+1] - 48) + ((buff[k] - 48) * 10);	
 			load_asset(tile);
 
@@ -91,6 +95,24 @@ void init_startup_state()
 		current = next;
 	}
 	head_node = prev;
+
+	/* Player Stuff */
+	TileAsset_T *bottile, *toptile;
+	bottile = malloc(sizeof(TileAsset_T));
+	toptile = malloc(sizeof(TileAsset_T));
+	bottile->id = 3;
+	toptile->id = 2;
+	load_asset(bottile);
+	load_asset(toptile);
+	player.bottomtile = bottile;	
+	player.toptile = toptile;	
+
+	player.x = 15;
+	player.y = -15;
+	player.z = 1;
+
+	/* Camera Stuff */
+	move_camera(&CAMERA, 0, 500);
 
 }
 

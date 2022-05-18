@@ -15,6 +15,7 @@
 #include "initstates.h"
 
 SDL_Renderer *RENDERER;
+Camera_T CAMERA;
 
 int main(int argc, char **argv)
 {
@@ -25,6 +26,8 @@ int main(int argc, char **argv)
 	SDL_Init(SDL_INIT_VIDEO);
 	window = SDL_CreateWindow("Lang Board Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, 0);
 	RENDERER = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	CAMERA.x = 0.0f; 
+	CAMERA.y = 0.0f; 
 
 	/* Parse Args */ 
 	bool FPS_FLAG = false;
@@ -70,7 +73,7 @@ int main(int argc, char **argv)
 	/* Frame Rate Stuff */
 	int32_t elapsed = 0;
 	int frametime = 0;
-	char framecount[16] = "Frames: 0\0";
+	char framecount[16] = "FPS: 0\0";
 	int updates, count;
 	Text_t frametext; 
 	init_text(&frametext, framecount, font12px, 0, 0, white);
@@ -122,7 +125,7 @@ int main(int argc, char **argv)
 			updates++;
 			if (elapsed >= 1000*count)
 			{
-				sprintf(framecount, "Frames: %d\0", updates);
+				sprintf(framecount, "FPS: %d\0", updates);
 				count++;
 				updates = 0;
 				init_text(&frametext, framecount, font12px, 0, HEIGHT-10, white);

@@ -7,9 +7,13 @@
 #include "definitions.h"
 
 #define MENU_SCREEN_PATH "../assets/menuscreen.png"
+
 #define GRASS_TILE_PATH "../assets/tiles/grass.png"
 #define STONE_TILE_PATH "../assets/tiles/stone.png"
-#define TOTAL_ASSETS 1 
+#define DARK_STONE_TILE_PATH "../assets/tiles/darkstone.png"
+#define PLAYER_TOP_TILE_PATH "../assets/tiles/playertop.png"
+#define PLAYER_BOTTOM_TILE_PATH "../assets/tiles/playerbottom.png"
+#define TEMPLATE_TILE_PATH "../assets/tiles/template.png"
 
 int load_asset(TileAsset_T *tile);
 
