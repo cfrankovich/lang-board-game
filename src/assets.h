@@ -9,6 +9,8 @@
 #define MENU_SCREEN_PATH "../assets/menuscreen.png"
 #define DIALOG_BOX_PATH "../assets/dialogbox.png"
 #define CURSOR_IMG_PATH "../assets/cursor.png"
+#define DIE_ANIMATION_PATH "../assets/dicerollanimation.png"
+#define DIE_FACES_PATH "../assets/diestages.png"
 
 #define GRASS_TILE_PATH "../assets/tiles/grass.png"
 #define STONE_TILE_PATH "../assets/tiles/stone.png"

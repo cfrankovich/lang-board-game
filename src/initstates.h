@@ -26,6 +26,11 @@ extern Dialog_T *dialog_queue[16];
 void init_startup_state();
 
 /* Game State */
+extern unsigned short turn;
+extern unsigned int dierollcount; 
+extern MyAnimation_T dieanim;
+extern MyAnimation_T dieface;
+extern bool rolling;
 void init_game_state();
 
 #endif

@@ -22,6 +22,16 @@ typedef struct
 	SDL_Rect hitbox;
 } MyImage_T;
 
+typedef struct 
+{
+	SDL_Texture *texture;
+	SDL_Rect src;
+	SDL_Rect dest;
+	float animtime;
+	unsigned short idx;
+	float timesincelast; 
+} MyAnimation_T;
+
 /* width and height are not exact pixels   */
 /* for example, player is two hight (96px) */
 typedef struct 
@@ -62,5 +72,8 @@ typedef struct
 
 extern Camera_T CAMERA;
 extern SDL_Renderer *RENDERER;
+extern float NOW;  
+extern float ELAPSED;  
+extern float LASTTIME;
 
 #endif 

@@ -26,6 +26,15 @@ void remove_dialog()
 	dialog_queue[15] = NULL;
 }
 
+void free_dialog()
+{
+	for (int i = 0; i < 16; ++i)
+	{
+		free(dialog_queue[i]);
+	}
+	dialog_queue[0] = NULL;
+}
+
 void new_dialog(bool q, char *text)
 {
 	Dialog_T *dialog;

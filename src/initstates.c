@@ -133,8 +133,48 @@ void init_startup_state()
 
 }
 
+unsigned short turn;
+unsigned int dierollcount; 
+MyAnimation_T dieanim;
+MyAnimation_T dieface;
+bool rolling;
 void init_game_state()
 {
+	/* Free Dialog */
+	free_dialog();
+
+	/* Turn Stuff */
+	turn = 1;
+
+	/* Dice Stuff */
+	dierollcount = 50;
+
+	dieanim.texture = IMG_LoadTexture(RENDERER, DIE_ANIMATION_PATH);
+
+	dieanim.src.x = 0;
+	dieanim.src.y = 0;
+	dieanim.src.w = 100;
+	dieanim.src.h = 100;
+
+	dieanim.dest.x = 100;
+	dieanim.dest.y = 100;
+	dieanim.dest.w = 100;
+	dieanim.dest.h = 100;
+
+	dieanim.animtime = 0.1;
+
+	dieface.texture = IMG_LoadTexture(RENDERER, DIE_FACES_PATH);
+	dieface.src.x = 0;
+	dieface.src.y = 0;
+	dieface.src.w = 100;
+	dieface.src.h = 100;
+
+	dieface.dest.x = 100;
+	dieface.dest.y = 100;
+	dieface.dest.w = 100;
+	dieface.dest.h = 100;
+
+	rolling = false;
 
 }
 

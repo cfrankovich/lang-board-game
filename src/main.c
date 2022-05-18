@@ -16,7 +16,9 @@
 
 SDL_Renderer *RENDERER;
 Camera_T CAMERA;
-
+float NOW;  
+float ELAPSED;  
+float LASTTIME;
 int main(int argc, char **argv)
 {
 	/* Basic SDL Stuff */
@@ -70,7 +72,9 @@ int main(int argc, char **argv)
 	SDL_Color white = { 255, 255, 255 };
 
 	/* Frame Rate Stuff */
-	int32_t elapsed = 0;
+	NOW = 0;
+	LASTTIME = 0;
+	ELAPSED = 0;
 	int frametime = 0;
 	char framecount[16] = "FPS: 0\0";
 	int updates, count;
@@ -95,7 +99,9 @@ int main(int argc, char **argv)
 
 	while (running)
 	{
-		elapsed = SDL_GetTicks();
+		NOW = SDL_GetTicks();
+		ELAPSED = (NOW - LASTTIME) / 1000;
+		LASTTIME = NOW;
 
 		/* Background */
 		SDL_SetRenderDrawColor(RENDERER, 0x00, 0x00, 0x00, 0xFF);
@@ -137,7 +143,7 @@ int main(int argc, char **argv)
 		if (FPS_FLAG) 
 		{
 			updates++;
-			if (elapsed >= 1000*count)
+			if (NOW >= 1000*count)
 			{
 				sprintf(framecount, "FPS: %d\0", updates);
 				count++;
@@ -150,7 +156,7 @@ int main(int argc, char **argv)
 
 		SDL_RenderPresent(RENDERER);
 
-		frametime = SDL_GetTicks() - elapsed;
+		frametime = SDL_GetTicks() - NOW;
 		if (1000 / FPS > frametime) SDL_Delay((1000 / FPS) - frametime);
 	}
 

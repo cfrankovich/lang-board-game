@@ -13,4 +13,7 @@ void remove_dialog();
 /* Creates a new dialog */
 void new_dialog(bool q, char *text);
 
+/* Free all dialog */
+void free_dialog();
+
 #endif
