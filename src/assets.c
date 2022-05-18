@@ -28,6 +28,10 @@ int load_asset(TileAsset_T *tile)
 			tile->texture = IMG_LoadTexture(RENDERER, DARK_STONE_TILE_PATH);
 			return 0;
 
+		case 5:
+			tile->texture = IMG_LoadTexture(RENDERER, VOID_TILE_PATH);
+			return 0;
+
 		case 99:
 			tile->texture = IMG_LoadTexture(RENDERER, TEMPLATE_TILE_PATH);
 			return 0;

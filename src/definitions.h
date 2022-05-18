@@ -3,11 +3,14 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <stdbool.h>
+
+#include "text.h"
 
 #define FPS 60 
-#define WIDTH 800
-#define HEIGHT 600
-#define SCALE 1.5
+#define WIDTH 1280 
+#define HEIGHT 720 
+#define SCALE 2
 #define TOTAL_SPACES 160
 #define OPT_LIST "dDfF"
 #define FONT_PATH "/usr/share/fonts/liberation-fonts/LiberationMono-Regular.ttf"
@@ -48,6 +51,14 @@ typedef struct
 	float x;
 	float y;
 } Camera_T;
+
+typedef struct
+{
+	bool quitable;
+	MyImage_T img;
+	TTF_Font *font;
+	Text_t text;
+} Dialog_T;
 
 extern Camera_T CAMERA;
 extern SDL_Renderer *RENDERER;

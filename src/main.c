@@ -26,6 +26,7 @@ int main(int argc, char **argv)
 	SDL_Init(SDL_INIT_VIDEO);
 	window = SDL_CreateWindow("Lang Board Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, 0);
 	RENDERER = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	SDL_ShowCursor(SDL_DISABLE);
 	CAMERA.x = 0.0f; 
 	CAMERA.y = 0.0f; 
 
@@ -67,8 +68,6 @@ int main(int argc, char **argv)
 
 	/* Colors */
 	SDL_Color white = { 255, 255, 255 };
-	SDL_Color red = { 226, 44, 44 };
-	SDL_Color blue = { 44, 44, 226 };
 
 	/* Frame Rate Stuff */
 	int32_t elapsed = 0;
@@ -78,6 +77,14 @@ int main(int argc, char **argv)
 	Text_t frametext; 
 	init_text(&frametext, framecount, font12px, 0, 0, white);
 	updates = count = 0;
+
+	/* Cursor Img */
+	MyImage_T cursorimg;
+	cursorimg.texture = IMG_LoadTexture(RENDERER, CURSOR_IMG_PATH);
+	cursorimg.hitbox.x = 0;
+	cursorimg.hitbox.y = 0;
+	cursorimg.hitbox.w = 30;
+	cursorimg.hitbox.h = 30;
 
 	/* Game Loop */
 	bool running; 
@@ -118,6 +125,13 @@ int main(int argc, char **argv)
 				if (state != 'G') init_state(state);
 				break;
 		}
+
+		/* Cursor Stuff */
+		int mposx, mposy;
+		SDL_GetMouseState(&mposx, &mposy);
+		cursorimg.hitbox.x = mposx;
+		cursorimg.hitbox.y = mposy;
+		SDL_RenderCopy(RENDERER, cursorimg.texture, NULL, &cursorimg.hitbox);
 
 		/* FPS Counter */
 		if (FPS_FLAG) 

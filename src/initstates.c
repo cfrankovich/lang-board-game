@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
+#include <stdbool.h>
 
 #include "definitions.h"
 #include "initstates.h"
 #include "assets.h"
 #include "camera.h"
+#include "text.h"
+#include "dialog.h"
 
 void init_state(char newstate)
 {
@@ -30,14 +33,15 @@ void init_menu_state()
 	menuimage.texture = IMG_LoadTexture(RENDERER, MENU_SCREEN_PATH);
 	menuimage.hitbox.x = 0;
 	menuimage.hitbox.y = 0;
-	menuimage.hitbox.w = WIDTH;
-	menuimage.hitbox.h = HEIGHT;
+	menuimage.hitbox.w = 800;
+	menuimage.hitbox.h = 600;
 }
 
 struct MapNode *head_node;
 unsigned int map_width;
 unsigned int map_height;
 Player_T player;
+Dialog_T *dialog_queue[16];
 void init_startup_state()
 {
 	/* Map Stuff */
@@ -113,6 +117,19 @@ void init_startup_state()
 
 	/* Camera Stuff */
 	move_camera(&CAMERA, 0, 500);
+
+	/* Dialog Box Stuff */
+	new_dialog(true, "Welcome to \"The Perks of Being a Wallflower, The Board Game.\"");
+	new_dialog(true, "To skip the tutorial at anytime, press [RETURN].");
+	new_dialog(true, "This game is very simple to play. Pay attention to these instructions.");
+	new_dialog(true, "The goal of the game is to reach the end of the board or story if you will, in the least amount of moves possible.");
+	new_dialog(true, "If you are playing with multiple people, the first one to the end wins!");
+	new_dialog(true, "When prompted, press [RETURN] to roll the dice. This will move you that number of spaces.");
+	new_dialog(true, "When landing on a trivia square, you are required to answer the question given.");
+	new_dialog(true, "These questions are related to the area of the map in which you are located in.");
+	new_dialog(true, "If the question is answered correctly, you can roll again.");
+	new_dialog(true, "If answered incorrectly, you roll the die how many spaces you go back.");
+	new_dialog(true, "Good luck :)");
 
 }
 

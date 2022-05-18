@@ -26,26 +26,16 @@ char tick_startup_state(SDL_Event e, bool *running)
 					*running = false;
 					break;
 
-				case SDLK_h:
-					CAMERA.x -= 10;
+				case SDLK_RETURN:
+					return 'G';
 					break;
 
-				case SDLK_l:
-					CAMERA.x += 10;
-					break;
-
-				case SDLK_j:
-					CAMERA.y += 10;
-					break;
-
-				case SDLK_k:
-					CAMERA.y -= 10;
+				case SDLK_SPACE:
+					remove_dialog();
 					break;
 			}
 			break;
 	}
-
-	//printf("CAMERA POS (%f, %f)\n", CAMERA.x, CAMERA.y);
 
 	update_camera_from_player(&player);
 
@@ -74,6 +64,13 @@ void render_startup_state()
 	/* Player */
 	draw_tile(player.bottomtile, player.x, player.y, player.z);	
 	draw_tile(player.toptile, player.x, player.y, player.z+1);	
+
+	/* Dialog */
+	if (dialog_queue[0] != NULL)
+	{
+		SDL_RenderCopy(RENDERER, dialog_queue[0]->img.texture, NULL, &dialog_queue[0]->img.hitbox);
+		SDL_RenderCopy(RENDERER, dialog_queue[0]->text.texture, NULL, &dialog_queue[0]->text.rect);
+	}
 
 }
 
@@ -107,5 +104,4 @@ void render_game_state()
 {
 	
 }
-
 

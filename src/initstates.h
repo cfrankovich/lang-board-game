@@ -7,6 +7,8 @@
 #include "definitions.h"
 #include "assets.h"
 #include "camera.h"
+#include "text.h"
+#include "dialog.h"
 
 /* Properly calls which state needs to be initialized */
 void init_state(char newstate); 
@@ -20,6 +22,7 @@ extern struct MapNode *head_node;
 extern unsigned int map_height;
 extern unsigned int map_width;
 extern Player_T player;
+extern Dialog_T *dialog_queue[16];
 void init_startup_state();
 
 /* Game State */

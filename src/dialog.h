@@ -1,0 +1,16 @@
+#ifndef MY_DIALOG_HEADER
+#define MY_DIALOG_HEADER
+
+#include "definitions.h"
+#include "initstates.h"
+
+/* Adds dialog to queue */
+void queue_dialog(Dialog_T *d);
+
+/* Removes first dialog from queue */
+void remove_dialog();
+
+/* Creates a new dialog */
+void new_dialog(bool q, char *text);
+
+#endif
