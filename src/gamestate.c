@@ -67,8 +67,7 @@ void render_startup_state()
 	/* Dialog */
 	if (dialog_queue[0] != NULL)
 	{
-		SDL_RenderCopy(RENDERER, dialog_queue[0]->img.texture, NULL, &dialog_queue[0]->img.hitbox);
-		SDL_RenderCopy(RENDERER, dialog_queue[0]->text.texture, NULL, &dialog_queue[0]->text.rect);
+		render_dialog();
 	}
 
 }
@@ -153,8 +152,7 @@ void render_game_state()
 	/* Dialog */
 	if (dialog_queue[0] != NULL)
 	{
-		SDL_RenderCopy(RENDERER, dialog_queue[0]->img.texture, NULL, &dialog_queue[0]->img.hitbox);
-		SDL_RenderCopy(RENDERER, dialog_queue[0]->text.texture, NULL, &dialog_queue[0]->text.rect);
+		render_dialog();
 	}
 
 }

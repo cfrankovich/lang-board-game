@@ -67,7 +67,7 @@ typedef struct
 	bool quitable;
 	MyImage_T img;
 	TTF_Font *font;
-	Text_t text;
+	char *text;
 } Dialog_T;
 
 extern Camera_T CAMERA;

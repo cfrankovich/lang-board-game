@@ -119,17 +119,17 @@ void init_startup_state()
 	move_camera(&CAMERA, 0, 500);
 
 	/* Dialog Box Stuff */
-	new_dialog(true, "Welcome to \"The Perks of Being a Wallflower, The Board Game.\"");
-	new_dialog(true, "To skip the tutorial at anytime, press [RETURN].");
-	new_dialog(true, "This game is very simple to play. Pay attention to these instructions.");
-	new_dialog(true, "The goal of the game is to reach the end of the board or story if you will, in the least amount of moves possible.");
-	new_dialog(true, "If you are playing with multiple people, the first one to the end wins!");
-	new_dialog(true, "When prompted, press [RETURN] to roll the dice. This will move you that number of spaces.");
-	new_dialog(true, "When landing on a trivia square, you are required to answer the question given.");
-	new_dialog(true, "These questions are related to the area of the map in which you are located in.");
-	new_dialog(true, "If the question is answered correctly, you can roll again.");
-	new_dialog(true, "If answered incorrectly, you roll the die how many spaces you go back.");
-	new_dialog(true, "Good luck :)");
+	new_dialog(true, "Welcome to \"The Perks of Being a Wallflower, The Board Game.\"\0");
+	new_dialog(true, "To skip the tutorial at anytime, press [RETURN].\0");
+	new_dialog(true, "This game is very simple to play. Pay attention to these instructions.\0");
+	new_dialog(true, "The goal of the game is to reach the end of the board or story if you will, in the least amount of moves possible.\0");
+	new_dialog(true, "If you are playing with multiple people, the first one to the end wins!\0");
+	new_dialog(true, "When prompted, press [RETURN] to roll the dice. This will move you that number of spaces.\0");
+	new_dialog(true, "When landing on a trivia square, you are required to answer the question given.\0");
+	new_dialog(true, "These questions are related to the area of the map in which you are located in.\0");
+	new_dialog(true, "If the question is answered correctly, you can roll again.\0");
+	new_dialog(true, "If answered incorrectly, you roll the die how many spaces you go back.\0");
+	new_dialog(true, "Good luck :)\0");
 
 }
 
@@ -156,10 +156,10 @@ void init_game_state()
 	dieanim.src.w = 100;
 	dieanim.src.h = 100;
 
-	dieanim.dest.x = 100;
-	dieanim.dest.y = 100;
-	dieanim.dest.w = 100;
-	dieanim.dest.h = 100;
+	dieanim.dest.x = WIDTH/2 - 75;
+	dieanim.dest.y = 150;
+	dieanim.dest.w = 150;
+	dieanim.dest.h = 150;
 
 	dieanim.animtime = 0.1;
 

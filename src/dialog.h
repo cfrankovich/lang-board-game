@@ -16,4 +16,7 @@ void new_dialog(bool q, char *text);
 /* Free all dialog */
 void free_dialog();
 
+/* Render dialog (Uesd to fix Issue #4) */
+void render_dialog();
+
 #endif
