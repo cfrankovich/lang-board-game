@@ -31,6 +31,7 @@ void free_dialog()
 	for (int i = 0; i < 16; ++i)
 	{
 		free(dialog_queue[i]);
+		dialog_queue[i] = NULL;
 	}
 	dialog_queue[0] = NULL;
 }
@@ -75,7 +76,7 @@ void render_dialog()
 			init_text(&text, buffer, dialog_queue[0]->font, dialog_queue[0]->img.hitbox.x + 30, dialog_queue[0]->img.hitbox.y + 20 + yoff, color);
 			SDL_RenderCopy(RENDERER, text.texture, NULL, &text.rect);
 			iter = -1;
-			yoff += 20;
+			yoff += 30;
 		}
 		++iter;
 		++itertwo;

@@ -21,16 +21,17 @@ void init_menu_state();
 extern struct MapNode *head_node;
 extern unsigned int map_height;
 extern unsigned int map_width;
-extern Player_T player;
+extern Player_T *players[3];
 extern Dialog_T *dialog_queue[16];
 void init_startup_state();
 
 /* Game State */
-extern unsigned short turn;
+extern unsigned int turn;
 extern unsigned int dierollcount; 
 extern MyAnimation_T dieanim;
 extern MyAnimation_T dieface;
 extern bool rolling;
+extern bool changingturn;
 void init_game_state();
 
 #endif

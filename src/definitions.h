@@ -54,6 +54,7 @@ typedef struct
 	TileAsset_T *toptile;
 	float x, y, z;
 	unsigned int spacestogo;
+	float timesincelastmove; 
 } Player_T; 
 
 typedef struct

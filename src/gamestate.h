@@ -3,6 +3,9 @@
 
 #include <SDL2/SDL.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
 
 #include "definitions.h"
 #include "gamestate.h"

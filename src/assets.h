@@ -20,6 +20,9 @@
 #define VOID_TILE_PATH "../assets/tiles/void.png"
 #define TEMPLATE_TILE_PATH "../assets/tiles/template.png"
 
+#define SCHOOL_FLOOR_ONE "../assets/tiles/schoolfloorone.png"
+#define SCHOOL_FLOOR_TWO "../assets/tiles/schoolfloortwo.png"
+
 int load_asset(TileAsset_T *tile);
 
 #endif 

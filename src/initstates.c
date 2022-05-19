@@ -40,7 +40,7 @@ void init_menu_state()
 struct MapNode *head_node;
 unsigned int map_width;
 unsigned int map_height;
-Player_T player;
+Player_T *players[3]; /* max three players (charlie, patrick, or sam) */
 Dialog_T *dialog_queue[16];
 void init_startup_state()
 {
@@ -101,6 +101,8 @@ void init_startup_state()
 	head_node = prev;
 
 	/* Player Stuff */
+	Player_T *player;
+	player = malloc(sizeof(Player_T));
 	TileAsset_T *bottile, *toptile;
 	bottile = malloc(sizeof(TileAsset_T));
 	toptile = malloc(sizeof(TileAsset_T));
@@ -108,12 +110,13 @@ void init_startup_state()
 	toptile->id = 2;
 	load_asset(bottile);
 	load_asset(toptile);
-	player.bottomtile = bottile;	
-	player.toptile = toptile;	
+	player->bottomtile = bottile;	
+	player->toptile = toptile;	
+	players[0] = player;
 
-	player.x = 15;
-	player.y = -15;
-	player.z = 1;
+	player->x = 15;
+	player->y = -16;
+	player->z = 1;
 
 	/* Camera Stuff */
 	move_camera(&CAMERA, 0, 500);
@@ -133,11 +136,12 @@ void init_startup_state()
 
 }
 
-unsigned short turn;
+unsigned int turn;
 unsigned int dierollcount; 
 MyAnimation_T dieanim;
 MyAnimation_T dieface;
 bool rolling;
+bool changingturn;
 void init_game_state()
 {
 	/* Free Dialog */
@@ -145,6 +149,7 @@ void init_game_state()
 
 	/* Turn Stuff */
 	turn = 1;
+	changingturn = true;
 
 	/* Dice Stuff */
 	dierollcount = 50;
@@ -163,16 +168,18 @@ void init_game_state()
 
 	dieanim.animtime = 0.1;
 
-	dieface.texture = IMG_LoadTexture(RENDERER, DIE_FACES_PATH);
+	dieface.texture = IMG_LoadTexture(RENDERER, DIE_FACES_PATH); 
 	dieface.src.x = 0;
 	dieface.src.y = 0;
 	dieface.src.w = 100;
 	dieface.src.h = 100;
 
-	dieface.dest.x = 100;
-	dieface.dest.y = 100;
-	dieface.dest.w = 100;
-	dieface.dest.h = 100;
+	dieface.dest.x = WIDTH/2 - 75;
+	dieface.dest.y = 150;
+	dieface.dest.w = 130;
+	dieface.dest.h = 130;
+
+	dieface.animtime = 0.5;
 
 	rolling = false;
 

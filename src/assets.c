@@ -32,6 +32,14 @@ int load_asset(TileAsset_T *tile)
 			tile->texture = IMG_LoadTexture(RENDERER, VOID_TILE_PATH);
 			return 0;
 
+		case 6:
+			tile->texture = IMG_LoadTexture(RENDERER, SCHOOL_FLOOR_ONE);
+			break;
+
+		case 7:
+			tile->texture = IMG_LoadTexture(RENDERER, SCHOOL_FLOOR_TWO);
+			break;
+
 		case 99:
 			tile->texture = IMG_LoadTexture(RENDERER, TEMPLATE_TILE_PATH);
 			return 0;
