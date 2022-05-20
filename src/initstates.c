@@ -33,15 +33,17 @@ void init_menu_state()
 	menuimage.texture = IMG_LoadTexture(RENDERER, MENU_SCREEN_PATH);
 	menuimage.hitbox.x = 0;
 	menuimage.hitbox.y = 0;
-	menuimage.hitbox.w = 800;
-	menuimage.hitbox.h = 600;
+	menuimage.hitbox.w = 1280;
+	menuimage.hitbox.h = 720;
 }
 
 struct MapNode *head_node;
+unsigned short moveablespaces[TOTAL_SPACES];
 unsigned int map_width;
 unsigned int map_height;
 Player_T *players[3]; /* max three players (charlie, patrick, or sam) */
 Dialog_T *dialog_queue[16];
+unsigned short totalplayers;
 void init_startup_state()
 {
 	/* Map Stuff */
@@ -63,6 +65,8 @@ void init_startup_state()
 	head_node = NULL;
 
 	/* Using that width and height read the rest of the map and generate a linked list for rendering */
+	int mi;
+	mi = TOTAL_SPACES-1;
 	for (iter = 0; iter < map_height; ++iter)
 	{
 		fgets(buff, 255, mapfile);	
@@ -73,6 +77,10 @@ void init_startup_state()
 			tile->width = 1;
 			tile->height = 1;
 			tile->id = (buff[k+1] - 48) + ((buff[k] - 48) * 10);	
+
+			if (tile->id == 1 || tile->id == 4) { moveablespaces[mi--] = 0; }
+			else if (tile->id == 9) { moveablespaces[mi--] = 1; }
+
 			load_asset(tile);
 
 			struct MapNode *newnode;
@@ -112,27 +120,31 @@ void init_startup_state()
 	load_asset(toptile);
 	player->bottomtile = bottile;	
 	player->toptile = toptile;	
+	player->spacestogo = 0;
+	player->totalspacestogo = TOTAL_SPACES;
 	players[0] = player;
 
 	player->x = 15;
 	player->y = -16;
 	player->z = 1;
 
+	totalplayers = 1;
+
 	/* Camera Stuff */
 	move_camera(&CAMERA, 0, 500);
 
 	/* Dialog Box Stuff */
-	new_dialog(true, "Welcome to \"The Perks of Being a Wallflower, The Board Game.\"\0");
-	new_dialog(true, "To skip the tutorial at anytime, press [RETURN].\0");
-	new_dialog(true, "This game is very simple to play. Pay attention to these instructions.\0");
-	new_dialog(true, "The goal of the game is to reach the end of the board or story if you will, in the least amount of moves possible.\0");
-	new_dialog(true, "If you are playing with multiple people, the first one to the end wins!\0");
-	new_dialog(true, "When prompted, press [RETURN] to roll the dice. This will move you that number of spaces.\0");
-	new_dialog(true, "When landing on a trivia square, you are required to answer the question given.\0");
-	new_dialog(true, "These questions are related to the area of the map in which you are located in.\0");
-	new_dialog(true, "If the question is answered correctly, you can roll again.\0");
-	new_dialog(true, "If answered incorrectly, you roll the die how many spaces you go back.\0");
-	new_dialog(true, "Good luck :)\0");
+	new_dialog("Welcome to \"The Perks of Being a Wallflower, The Board Game.\"\0");
+	new_dialog("To skip the tutorial at anytime, press [RETURN].\0");
+	new_dialog("This game is very simple to play. Pay attention to these instructions.\0");
+	new_dialog("The goal of the game is to reach the end of the board or story if you will, in the least amount of moves possible.\0");
+	new_dialog("If you are playing with multiple people, the first one to the end wins!\0");
+	new_dialog("When prompted, press [RETURN] to roll the dice. This will move you that number of spaces.\0");
+	new_dialog("When landing on a trivia square, you are required to answer the question given.\0");
+	new_dialog("These questions are related to the area of the map in which you are located in.\0");
+	new_dialog("If the question is answered correctly, you can roll again.\0");
+	new_dialog("If answered incorrectly, you roll the die how many spaces you go back.\0");
+	new_dialog("Good luck :)\0");
 
 }
 
@@ -141,7 +153,9 @@ unsigned int dierollcount;
 MyAnimation_T dieanim;
 MyAnimation_T dieface;
 bool rolling;
+bool rolled; 
 bool changingturn;
+bool triviatime;
 void init_game_state()
 {
 	/* Free Dialog */
@@ -182,6 +196,9 @@ void init_game_state()
 	dieface.animtime = 0.5;
 
 	rolling = false;
+	rolled = false;
+
+	triviatime = true;
 
 }
 

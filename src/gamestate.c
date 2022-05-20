@@ -24,7 +24,7 @@ char tick_startup_state(SDL_Event e, bool *running)
 		case SDL_KEYDOWN:
 			switch (e.key.keysym.sym)
 			{
-				case SDLK_q:
+				case SDLK_ESCAPE:
 					printf("Exiting...\n");
 					*running = false;
 					break;
@@ -34,7 +34,7 @@ char tick_startup_state(SDL_Event e, bool *running)
 					break;
 
 				case SDLK_SPACE:
-					remove_dialog();
+					remove_dialog(false);
 					if (dialog_queue[0] == NULL) return 'G';
 					break;
 			}
@@ -76,6 +76,13 @@ void render_startup_state()
 
 }
 
+void switch_turns()
+{
+	triviatime = true;
+	changingturn = true;	
+	rolled = false;
+}
+
 /* Game */
 bool showresult;
 char tick_game_state(SDL_Event e, bool *running)
@@ -91,7 +98,29 @@ char tick_game_state(SDL_Event e, bool *running)
 		case SDL_KEYDOWN:
 			switch (e.key.keysym.sym)
 			{
-				case SDLK_q:
+				case SDLK_a:
+				case SDLK_b:
+				case SDLK_c:
+				case SDLK_d:
+					if ((dialog_queue[0] != NULL) && (!dialog_queue[0]->quitable))
+					{
+						if (dialog_queue[0]->correct == e.key.keysym.sym)
+						{
+							remove_dialog(true);
+							new_dialog("That is correct!\0");
+							new_dialog("Here is a free roll.");
+							rolling = true;
+						}
+						else
+						{
+							remove_dialog(true);
+							new_dialog("That is incorrect.\0");
+							switch_turns();
+						}
+					}
+					break;
+
+				case SDLK_ESCAPE:
 					printf("Exiting...\n");
 					*running = false;
 					break;
@@ -107,11 +136,12 @@ char tick_game_state(SDL_Event e, bool *running)
 						srand((unsigned) time(&t));
 						players[turn-1]->spacestogo = rand() % 6 + 1; 
 						showresult = true;
+						rolled = true;
 					}
 					break;
 
 				case SDLK_SPACE:
-					remove_dialog();
+					remove_dialog(false);
 					break;
 
 			}
@@ -148,9 +178,23 @@ void render_game_state()
 	/* Turn Stuff */
 	if (changingturn)
 	{
-		sprintf(buffer, "It is now Player %ds turn. You are currently  located in [LOCATION]. %d moves to go to win.\0", turn, 0); 
-		new_dialog(true, buffer);
+		sprintf(buffer, "It is now Player %ds turn. You are currently  located in [LOCATION]. %d moves to go to win.\0", turn, players[turn-1]->totalspacestogo); 
+		rolling = true;
+		new_dialog(buffer);
 		changingturn = false;
+	}
+
+	/* so ugly. forgive me */
+	if (players[turn-1]->spacestogo == 0 && rolled) 
+	{
+		if (triviatime && (moveablespaces[TOTAL_SPACES - players[turn-1]->totalspacestogo] == 1))
+		{
+			new_dialog("You have landed on a trivia tile! Answer this question correctly or face consequences.");
+			new_trivia_dialog("what is the sqrt of 16", "poop\nidk\n5 i think\n4\n", 'd');
+			triviatime = false;
+			rolled = false;
+		}
+		else { switch_turns(); }
 	}
 
 	/* Player */
@@ -162,12 +206,11 @@ void render_game_state()
 		{
 			players[turn-1]->x -= 1;
 			players[turn-1]->spacestogo -= 1;
+			players[turn-1]->totalspacestogo -= 1;
 			players[turn-1]->timesincelastmove = 0;
 		}
 
 	}
-
-	
 
 	draw_tile(players[turn-1]->bottomtile, players[turn-1]->x, players[turn-1]->y, players[turn-1]->z);	
 	draw_tile(players[turn-1]->toptile, players[turn-1]->x, players[turn-1]->y, players[turn-1]->z+1);	

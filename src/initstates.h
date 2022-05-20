@@ -22,7 +22,9 @@ extern struct MapNode *head_node;
 extern unsigned int map_height;
 extern unsigned int map_width;
 extern Player_T *players[3];
+extern unsigned short totalplayers;
 extern Dialog_T *dialog_queue[16];
+extern unsigned short moveablespaces[TOTAL_SPACES];
 void init_startup_state();
 
 /* Game State */
@@ -31,7 +33,9 @@ extern unsigned int dierollcount;
 extern MyAnimation_T dieanim;
 extern MyAnimation_T dieface;
 extern bool rolling;
+extern bool rolled;
 extern bool changingturn;
+extern bool triviatime;
 void init_game_state();
 
 #endif

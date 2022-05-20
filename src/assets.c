@@ -40,6 +40,14 @@ int load_asset(TileAsset_T *tile)
 			tile->texture = IMG_LoadTexture(RENDERER, SCHOOL_FLOOR_TWO);
 			break;
 
+		case 8:
+			tile->texture = IMG_LoadTexture(RENDERER, DARK_GRASS_TILE_PATH);
+			break;
+
+		case 9:
+			tile->texture = IMG_LoadTexture(RENDERER, TRIVIA_SPACE_TILE);
+			break;
+
 		case 99:
 			tile->texture = IMG_LoadTexture(RENDERER, TEMPLATE_TILE_PATH);
 			return 0;

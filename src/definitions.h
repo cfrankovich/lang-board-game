@@ -11,10 +11,10 @@
 #define WIDTH 1280 
 #define HEIGHT 720 
 #define SCALE 2
-#define TOTAL_SPACES 160
+#define TOTAL_SPACES 167
 #define OPT_LIST "dDfF"
 #define FONT_PATH "/usr/share/fonts/liberation-fonts/LiberationMono-Regular.ttf"
-#define MAP_PATH "../assets/map.txt"
+#define MAP_PATH "../assets/map"
 
 typedef struct
 {
@@ -54,6 +54,7 @@ typedef struct
 	TileAsset_T *toptile;
 	float x, y, z;
 	unsigned int spacestogo;
+	unsigned int totalspacestogo;
 	float timesincelastmove; 
 } Player_T; 
 
@@ -65,10 +66,12 @@ typedef struct
 
 typedef struct
 {
-	bool quitable;
+	bool quitable; /* determines if its trivia */
 	MyImage_T img;
 	TTF_Font *font;
 	char *text;
+	char *answers;
+	char correct;
 } Dialog_T;
 
 extern Camera_T CAMERA;
