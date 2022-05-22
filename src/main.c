@@ -66,7 +66,6 @@ int main(int argc, char **argv)
 	/* Create Fonts */
 	TTF_Init();
 	TTF_Font *font12px = TTF_OpenFont(FONT_PATH, 12);
-	TTF_Font *font20px = TTF_OpenFont(FONT_PATH, 20);
 
 	/* Colors */
 	SDL_Color white = { 255, 255, 255 };
@@ -94,7 +93,7 @@ int main(int argc, char **argv)
 	bool running; 
 	running = true;
 	char state;
-	state = 'M';
+	state = 'S';
 	init_state(state);
 
 	while (running)
@@ -145,7 +144,7 @@ int main(int argc, char **argv)
 			updates++;
 			if (NOW >= 1000*count)
 			{
-				sprintf(framecount, "FPS: %d\0", updates);
+				sprintf(framecount, "FPS: %d", updates);
 				count++;
 				updates = 0;
 				init_text(&frametext, framecount, font12px, 0, HEIGHT-10, white);

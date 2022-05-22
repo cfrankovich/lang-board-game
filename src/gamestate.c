@@ -63,6 +63,7 @@ void render_startup_state()
 		current = current->next;
 		++iter;
 	}
+	free(current);
 
 	/* players[0] */
 	draw_tile(players[0]->bottomtile, players[0]->x, players[0]->y, players[0]->z);	
@@ -81,6 +82,7 @@ void switch_turns()
 	triviatime = true;
 	changingturn = true;	
 	rolled = false;
+	update_camera_from_player(players[turn-1]);
 }
 
 /* Game */
@@ -125,6 +127,10 @@ char tick_game_state(SDL_Event e, bool *running)
 					*running = false;
 					break;
 
+				case SDLK_n:
+					players[turn-1]->x -= 1;
+					break;
+
 				case SDLK_RETURN:
 					if (dialog_queue[0] != NULL) { break; }
 					else if (showresult) { showresult = false; break; }
@@ -148,7 +154,6 @@ char tick_game_state(SDL_Event e, bool *running)
 			break;
 	}
 
-	update_camera_from_player(players[0]);
 
 	return 'G';
 }
@@ -172,6 +177,7 @@ void render_game_state()
 		current = current->next;
 		++iter;
 	}
+	free(current);
 
 	/* oh god is this to many ifs LOL */
 

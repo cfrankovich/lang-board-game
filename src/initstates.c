@@ -78,7 +78,7 @@ void init_startup_state()
 			tile->height = 1;
 			tile->id = (buff[k+1] - 48) + ((buff[k] - 48) * 10);	
 
-			if (tile->id == 1 || tile->id == 4) { moveablespaces[mi--] = 0; }
+			if (tile->id >= 10 && tile->id <= 16) { moveablespaces[mi--] = 0; }
 			else if (tile->id == 9) { moveablespaces[mi--] = 1; }
 
 			load_asset(tile);
@@ -124,14 +124,15 @@ void init_startup_state()
 	player->totalspacestogo = TOTAL_SPACES;
 	players[0] = player;
 
-	player->x = 15;
-	player->y = -16;
+	player->x = 30;
+	player->y = 0;
 	player->z = 1;
+	player->updatecam = 0;
 
 	totalplayers = 1;
 
 	/* Camera Stuff */
-	move_camera(&CAMERA, 0, 500);
+	move_camera(&CAMERA, 1200, 1000);
 
 	/* Dialog Box Stuff */
 	new_dialog("Welcome to \"The Perks of Being a Wallflower, The Board Game.\"\0");

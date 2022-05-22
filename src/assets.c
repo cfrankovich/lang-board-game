@@ -48,6 +48,34 @@ int load_asset(TileAsset_T *tile)
 			tile->texture = IMG_LoadTexture(RENDERER, TRIVIA_SPACE_TILE);
 			break;
 
+		case 10:
+			tile->texture = IMG_LoadTexture(RENDERER, RED_PATH_TILE);
+			break;
+
+		case 11:
+			tile->texture = IMG_LoadTexture(RENDERER, ORANGE_PATH_TILE);
+			break;
+
+		case 12:
+			tile->texture = IMG_LoadTexture(RENDERER, YELLOW_PATH_TILE);
+			break;
+
+		case 13:
+			tile->texture = IMG_LoadTexture(RENDERER, GREEN_PATH_TILE);
+			break;
+
+		case 14:
+			tile->texture = IMG_LoadTexture(RENDERER, BLUE_PATH_TILE);
+			break;
+
+		case 15:
+			tile->texture = IMG_LoadTexture(RENDERER, PURPLE_PATH_TILE);
+			break;
+
+		case 16:
+			tile->texture = IMG_LoadTexture(RENDERER, PINK_PATH_TILE);
+			break;
+
 		case 99:
 			tile->texture = IMG_LoadTexture(RENDERER, TEMPLATE_TILE_PATH);
 			return 0;

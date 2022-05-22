@@ -10,8 +10,8 @@
 #define FPS 60 
 #define WIDTH 1280 
 #define HEIGHT 720 
-#define SCALE 2
-#define TOTAL_SPACES 167
+#define SCALE 2 
+#define TOTAL_SPACES 80 
 #define OPT_LIST "dDfF"
 #define FONT_PATH "/usr/share/fonts/liberation-fonts/LiberationMono-Regular.ttf"
 #define MAP_PATH "../assets/map"
@@ -52,10 +52,11 @@ typedef struct
 {
 	TileAsset_T *bottomtile;
 	TileAsset_T *toptile;
-	float x, y, z;
+	int x, y, z;
 	unsigned int spacestogo;
 	unsigned int totalspacestogo;
 	float timesincelastmove; 
+	int updatecam;
 } Player_T; 
 
 typedef struct

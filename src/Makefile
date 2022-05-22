@@ -1,10 +1,8 @@
 CC = gcc
-CFLAGS = -O2 -Wall
+CFLAGS = -O1 -Wall -g $(shell pkg-config --cflags sdl2 SDL2_ttf SDL2_image)
 LDFLAGS =
 NAME = game 
-SDL_CFLAGS := $(shell pkg-config --cflags sdl2 SDL2_ttf SDL2_image)
 SDL_LIBS := $(shell pkg-config --libs sdl2 SDL2_ttf SDL2_image)
-override CFLAGS += $(SDL_CFLAGS)
 override LIBS += $(SDL_LIBS)
 
 # Is there a beter way to write this?????? #
@@ -13,34 +11,34 @@ all: create
 	@echo "Done!"
 
 create: main.o text.o drawing.o assets.o initstates.o menustate.o gamestate.o camera.o dialog.o 
-	$(CC) $(LDFLAGS) -o $(NAME) $^ $(LIBS)
+	$(CC) $(CFLAGS) -o $(NAME) $^ $(LIBS)
 
 main.o: main.c 
-	$(CC) $(LDFLAGS) -o $@ -c $^ $(LIBS)
+	$(CC) $(CFLAGS) -o $@ -c $^ $(LIBS)
 
 text.o: text.c 
-	$(CC) $(LDFLAGS) -o $@ -c $^ $(LIBS)
+	$(CC) $(CFLAGS) -o $@ -c $^ $(LIBS)
 
 drawing.o: drawing.c 
-	$(CC) $(LDFLAGS) -o $@ -c $^ $(LIBS)
+	$(CC) $(CFLAGS) -o $@ -c $^ $(LIBS)
 
 assets.o: assets.c
-	$(CC) $(LDFLAGS) -o $@ -c $^ $(LIBS)
+	$(CC) $(CFLAGS) -o $@ -c $^ $(LIBS)
 
 initstates.o: initstates.c
-	$(CC) $(LDFLAGS) -o $@ -c $^ $(LIBS)
+	$(CC) $(CFLAGS) -o $@ -c $^ $(LIBS)
 
 menustate.o: menustate.c
-	$(CC) $(LDFLAGS) -o $@ -c $^ $(LIBS)
+	$(CC) $(CFLAGS) -o $@ -c $^ $(LIBS)
 
 gamestate.o: gamestate.c
-	$(CC) $(LDFLAGS) -o $@ -c $^ $(LIBS)
+	$(CC) $(CFLAGS) -o $@ -c $^ $(LIBS)
 
 camera.o: camera.c 
-	$(CC) $(LDFLAGS) -o $@ -c $^ $(LIBS)
+	$(CC) $(CFLAGS) -o $@ -c $^ $(LIBS)
 
 dialog.o: dialog.c 
-	$(CC) $(LDFLAGS) -o $@ -c $^ $(LIBS)
+	$(CC) $(CFLAGS) -o $@ -c $^ $(LIBS)
 
 clean:
 	rm -f $(NAME) *.o

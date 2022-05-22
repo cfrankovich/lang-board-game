@@ -23,6 +23,14 @@
 #define TEMPLATE_TILE_PATH "../assets/tiles/template.png"
 #define TRIVIA_SPACE_TILE "../assets/tiles/triviaspace.png"
 
+#define RED_PATH_TILE "../assets/tiles/redpath.png"
+#define ORANGE_PATH_TILE "../assets/tiles/orangepath.png"
+#define YELLOW_PATH_TILE "../assets/tiles/yellowpath.png"
+#define GREEN_PATH_TILE "../assets/tiles/greenpath.png"
+#define BLUE_PATH_TILE "../assets/tiles/bluepath.png"
+#define PURPLE_PATH_TILE "../assets/tiles/purplepath.png"
+#define PINK_PATH_TILE "../assets/tiles/pinkpath.png"
+
 #define SCHOOL_FLOOR_ONE "../assets/tiles/schoolfloorone.png"
 #define SCHOOL_FLOOR_TWO "../assets/tiles/schoolfloortwo.png"
 
